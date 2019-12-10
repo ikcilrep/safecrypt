@@ -1,5 +1,4 @@
 package com.example.safecrypt
-
 import org.junit.Test
 
 import org.junit.Assert.*
