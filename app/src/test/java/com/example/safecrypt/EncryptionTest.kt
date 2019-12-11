@@ -20,7 +20,6 @@ class EncryptionTest {
             val encryptedData = encrypt(data, key, iv, salt)
             val decryptedData = decrypt(encryptedData, key, iv, salt)
             Assert.assertEquals(decryptedData, data)
-
         }
     }
 }
