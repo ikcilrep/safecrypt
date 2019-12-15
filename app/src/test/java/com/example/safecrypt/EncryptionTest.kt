@@ -16,8 +16,7 @@ class EncryptionTest {
         val key = BigInteger(Random.nextBytes(32))
         for (length in 0..128) {
             val data = Random.nextUBytes(length)
-            val iv = Random.nextBytes(length)
-            val encryptedData = encrypt(data, key, iv, salt)
+            val (encryptedData, iv) = encrypt(data, key, salt)
             val decryptedData = decrypt(encryptedData, key, iv, salt)
             Assert.assertEquals(decryptedData, data)
         }
