@@ -7,7 +7,7 @@ fun ByteArray.dotProduct(other: ShortArray): Long =
 
 operator fun ByteArray.minus(other: ByteArray): ShortArray {
     if (other.size != size)
-        throw Exception("Vectors sizes are different.")
+        throw IllegalStateException("Vectors sizes are different.")
     return ShortArray(size) { (this[it] - other[it]).toShort() }
 }
 
