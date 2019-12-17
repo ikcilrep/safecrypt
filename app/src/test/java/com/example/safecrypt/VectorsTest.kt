@@ -1,6 +1,7 @@
 package com.example.safecrypt
 
 import com.example.safecrypt.nse.dotProduct
+import com.example.safecrypt.nse.isZeroVector
 import com.example.safecrypt.nse.minus
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -36,5 +37,19 @@ class VectorsTest {
 
     }
 
+    @Test
+    fun testIsZeroVector() {
+        val vectors = listOf(
+            Pair(byteArrayOf(), true),
+            Pair(byteArrayOf(0), true),
+            Pair(byteArrayOf(27), false),
+            Pair(byteArrayOf(0, 0), true),
+            Pair(byteArrayOf(1, 1), false)
+        )
+
+        for ((vector, expectedResult) in vectors) {
+            assertEquals(vector.isZeroVector(), expectedResult)
+        }
+    }
 
 }
