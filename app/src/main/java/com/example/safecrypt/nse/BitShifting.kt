@@ -1,5 +1,7 @@
 package com.example.safecrypt.nse
 
+import java.math.BigInteger
+
 @ExperimentalUnsignedTypes
 infix fun UByte.shl(shift: Int): UByte = (this.toInt() shl shift).toUByte()
 
@@ -16,14 +18,15 @@ fun shiftRightBitsInBytes(byte1: UByte, byte2: UByte, numberOfBitsToShift: Int):
 
 
 @ExperimentalUnsignedTypes
-fun UByteArray.shiftLeftBits(numberOfBitsToShift: Int): UByteArray {
+fun UByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): UByteArray {
     if (isEmpty()) {
         return UByteArray(0)
     }
 
-    val numberOfBitsToShiftWithoutSize = numberOfBitsToShift % (size shl 3)
-    val numberOfBytesToShift = numberOfBitsToShiftWithoutSize shr 3
-    val numberOfBitsToShiftWithoutBytes = numberOfBitsToShiftWithoutSize and 7
+    val (numberOfBytesToShift, numberOfBitsToShiftWithoutBytes) = numberOfBytesToShiftWithRest(
+        this,
+        numberOfBitsToShift
+    )
 
     val bitShifted = UByteArray(size)
     bitShifted[size - 1] =
@@ -44,13 +47,14 @@ fun UByteArray.shiftLeftBits(numberOfBitsToShift: Int): UByteArray {
 }
 
 @ExperimentalUnsignedTypes
-fun UByteArray.shiftRightBits(numberOfBitsToShift: Int): UByteArray {
+fun UByteArray.shiftRightBits(numberOfBitsToShift: BigInteger): UByteArray {
     if (isEmpty()) {
         return UByteArray(0)
     }
-    val numberOfBitsToShiftWithoutSize = numberOfBitsToShift % (size shl 3)
-    val numberOfBytesToShift = numberOfBitsToShiftWithoutSize shr 3
-    val numberOfBitsToShiftWithoutBytes = numberOfBitsToShiftWithoutSize and 7
+    val (numberOfBytesToShift, numberOfBitsToShiftWithoutBytes) = numberOfBytesToShiftWithRest(
+        this,
+        numberOfBitsToShift
+    )
 
     val byteShifted = UByteArray(size)
     (0 until numberOfBytesToShift).forEach {
@@ -74,3 +78,16 @@ fun UByteArray.shiftRightBits(numberOfBitsToShift: Int): UByteArray {
 
     return bitShifted
 }
+
+@ExperimentalUnsignedTypes
+fun numberOfBytesToShiftWithRest(
+    data: UByteArray,
+    numberOfBitsToShift: BigInteger
+): Pair<Int, Int> {
+    val numberOfBitsToShiftWithoutSize =
+        numberOfBitsToShift.mod((data.size shl 3).toBigInteger()).toInt()
+    val numberOfBytesToShift = numberOfBitsToShiftWithoutSize shr 3
+    val numberOfBitsToShiftWithoutBytes = numberOfBitsToShiftWithoutSize and 7
+    return Pair(numberOfBytesToShift, numberOfBitsToShiftWithoutBytes)
+}
+

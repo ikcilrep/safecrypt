@@ -12,7 +12,7 @@ class EncryptionTest {
     @ExperimentalUnsignedTypes
     @Test
     fun testEncrypt() {
-        val salt = Random.nextUBytes(16)
+        val salt = Random.nextBytes(16)
         val key = BigInteger(Random.nextBytes(32))
         for (length in 0..128) {
             val data = Random.nextUBytes(length)
