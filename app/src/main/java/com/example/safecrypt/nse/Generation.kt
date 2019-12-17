@@ -1,5 +1,9 @@
 package com.example.safecrypt.nse
 
+import org.bouncycastle.crypto.digests.SHA512Digest
+import org.bouncycastle.crypto.generators.HKDFBytesGenerator
+import org.bouncycastle.crypto.params.HKDFParameters
+import java.math.BigInteger
 import java.security.SecureRandom
 
 fun generateIV(length: Int, derivedKey: ByteArray, rotatedData: ByteArray): ByteArray {
@@ -14,3 +18,15 @@ fun generateIV(length: Int, derivedKey: ByteArray, rotatedData: ByteArray): Byte
     return iv
 }
 
+fun deriveKey(length: Int, key: BigInteger, salt: ByteArray): ByteArray {
+    val hkdf = HKDFBytesGenerator(SHA512Digest())
+    hkdf.init(HKDFParameters(key.toByteArray(), salt, byteArrayOf()))
+
+    var derivedKey: ByteArray
+    do {
+        derivedKey = ByteArray(length)
+        hkdf.generateBytes(derivedKey, 0, derivedKey.size)
+    } while (derivedKey.isZeroVector())
+
+    return derivedKey
+}

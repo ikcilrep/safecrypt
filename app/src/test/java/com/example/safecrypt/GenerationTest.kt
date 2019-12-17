@@ -1,11 +1,13 @@
 package com.example.safecrypt
 
+import com.example.safecrypt.nse.deriveKey
 import com.example.safecrypt.nse.dotProduct
 import com.example.safecrypt.nse.generateIV
 import com.example.safecrypt.nse.minus
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
+import java.math.BigInteger
 import kotlin.random.Random
 
 class GenerationTest {
@@ -17,6 +19,16 @@ class GenerationTest {
             val iv = generateIV(length, derivedKey, rotatedData)
             assertEquals(iv.size, length)
             assertNotEquals(derivedKey.dotProduct(rotatedData - iv), 0.toLong())
+        }
+    }
+
+    @Test
+    fun testDeriveKey() {
+        for (length in 1..10) {
+            val key = BigInteger(Random.nextBytes(length)).abs()
+            val salt = Random.nextBytes(16)
+            val derivedKey = deriveKey(length, key, salt)
+            assertEquals(derivedKey.size, length)
         }
     }
 }
