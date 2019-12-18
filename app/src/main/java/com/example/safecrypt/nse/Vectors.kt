@@ -1,5 +1,7 @@
 package com.example.safecrypt.nse
 
+import java.lang.IllegalArgumentException
+
 fun ByteArray.isZeroVector() = isEmpty() || filter { it == 0.toByte() }.size == size
 
 fun ByteArray.dotProduct(other: ShortArray): Long =
@@ -35,4 +37,9 @@ operator fun ByteArray.times(multiplier: Long): LongArray =
 operator fun LongArray.times(multiplier: Long): LongArray =
     LongArray(size) { this[it] * multiplier }
 
+operator fun LongArray.div(divisor: Long): ByteArray {
+    if (divisor == 0.toLong())
+        throw IllegalArgumentException("Divisor is 0.")
+    return ByteArray(size) { (this[it] / divisor).toByte() }
+}
 

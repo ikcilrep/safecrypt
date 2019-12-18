@@ -1,9 +1,6 @@
 package com.example.safecrypt
 
-import com.example.safecrypt.nse.dotProduct
-import com.example.safecrypt.nse.isZeroVector
-import com.example.safecrypt.nse.minus
-import com.example.safecrypt.nse.times
+import com.example.safecrypt.nse.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -111,6 +108,20 @@ class VectorsTest {
 
     }
 
+    @Test
+    fun testLongArrayDivision() {
+        val vectors = listOf(
+            Triple(longArrayOf(), 1.toLong(), byteArrayOf()),
+            Triple(longArrayOf(74), 37.toLong(), byteArrayOf(2)),
+            Triple(longArrayOf(16, 32), 4.toLong(), byteArrayOf(4, 8)),
+            Triple(longArrayOf(21, 42, 63), (-7).toLong(), byteArrayOf(-3, -6, -9))
+        )
+        for ((vector1, multiplier, expectedResult) in vectors) {
+            val result1 = vector1 / multiplier
+            assert(result1 contentEquals expectedResult)
+        }
+
+    }
     @Test
     fun testIsZeroVector() {
         val vectors = listOf(
