@@ -20,6 +20,12 @@ operator fun LongArray.minus(other: LongArray): LongArray {
     return LongArray(size) { this[it] - other[it]}
 }
 
+operator fun LongArray.plus(other: LongArray): LongArray {
+    if (other.size != size)
+        throw IllegalStateException("Vectors sizes are different.")
+    return LongArray(size) { this[it] + other[it]}
+}
+
 operator fun ByteArray.times(multiplier: Long): LongArray =
     LongArray(size) { this[it] * multiplier }
 

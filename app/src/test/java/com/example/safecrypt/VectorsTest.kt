@@ -66,6 +66,20 @@ class VectorsTest {
         }
 
     }
+    @Test
+    fun testLongArrayPlus() {
+        val vectors = listOf(
+            Triple(longArrayOf(), longArrayOf(), longArrayOf()),
+            Triple(longArrayOf(1), longArrayOf(3), longArrayOf(4)),
+            Triple(longArrayOf(53, -47), longArrayOf(21, 32), longArrayOf(74, -15)),
+            Triple(longArrayOf(16, 25, 3), longArrayOf(-36, -49, 2), longArrayOf(-20, -24, 5))
+        )
+        for ((vector1, vector2, expectedResult) in vectors) {
+            val result1 = vector1 + vector2
+            assert(result1 contentEquals expectedResult)
+        }
+
+    }
 
     @Test
     fun testLongArrayMultiply() {
