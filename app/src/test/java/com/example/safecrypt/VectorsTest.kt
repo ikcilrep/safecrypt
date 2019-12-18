@@ -3,6 +3,7 @@ package com.example.safecrypt
 import com.example.safecrypt.nse.dotProduct
 import com.example.safecrypt.nse.isZeroVector
 import com.example.safecrypt.nse.minus
+import com.example.safecrypt.nse.times
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -32,6 +33,21 @@ class VectorsTest {
         )
         for ((vector1, vector2, expectedResult) in vectors) {
             val result1 = vector1 - vector2
+            assert(result1 contentEquals expectedResult)
+        }
+
+    }
+
+    @Test
+    fun testMultiply() {
+        val vectors = listOf(
+            Triple(byteArrayOf(), 23.toByte(), shortArrayOf()),
+            Triple(byteArrayOf(1), 37.toByte(), shortArrayOf(37)),
+            Triple(byteArrayOf(53, -47), 53.toByte(), shortArrayOf(2809, -2491)),
+            Triple(byteArrayOf(16, 25, 3), (-3).toByte(), shortArrayOf(-48, -75, -9))
+        )
+        for ((vector1, multiplier, expectedResult) in vectors) {
+            val result1 = vector1 * multiplier
             assert(result1 contentEquals expectedResult)
         }
 

@@ -12,4 +12,6 @@ operator fun ByteArray.minus(other: ByteArray): ShortArray {
     return ShortArray(size) { (this[it] - other[it]).toShort() }
 }
 
+operator fun ByteArray.times(multiplier: Byte): ShortArray =
+    ShortArray(size) { (this[it] * multiplier).toShort() }
 
