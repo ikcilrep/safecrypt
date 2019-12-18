@@ -1,26 +1,26 @@
 package com.example.safecrypt.nse
 
 import java.math.BigInteger
+import kotlin.experimental.or
 
-@ExperimentalUnsignedTypes
-infix fun UByte.shl(shift: Int): UByte = (this.toInt() shl shift).toUByte()
 
-@ExperimentalUnsignedTypes
-infix fun UByte.shr(shift: Int): UByte = (this.toInt() shr shift).toUByte()
+infix fun Byte.shl(shift: Int): Byte = (this.toUByte().toInt() shl shift).toByte()
 
-@ExperimentalUnsignedTypes
-fun shiftLeftBitsInBytes(byte1: UByte, byte2: UByte, numberOfBitsToShift: Int): UByte =
+
+infix fun Byte.shr(shift: Int): Byte = (this.toUByte().toInt() shr shift).toByte()
+
+
+fun shiftLeftBitsInBytes(byte1: Byte, byte2: Byte, numberOfBitsToShift: Int): Byte =
     (byte1 shl numberOfBitsToShift) or (byte2 shr (8 - numberOfBitsToShift))
 
-@ExperimentalUnsignedTypes
-fun shiftRightBitsInBytes(byte1: UByte, byte2: UByte, numberOfBitsToShift: Int): UByte =
+
+fun shiftRightBitsInBytes(byte1: Byte, byte2: Byte, numberOfBitsToShift: Int): Byte =
     (byte1 shl (8 - numberOfBitsToShift)) or (byte2 shr numberOfBitsToShift)
 
 
-@ExperimentalUnsignedTypes
-fun UByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): UByteArray {
+fun ByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): ByteArray {
     if (isEmpty()) {
-        return UByteArray(0)
+        return ByteArray(0)
     }
 
     val (numberOfBytesToShift, numberOfBitsToShiftWithoutBytes) = numberOfBytesToShiftWithRest(
@@ -28,7 +28,7 @@ fun UByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): UByteArray {
         numberOfBitsToShift
     )
 
-    val bitShifted = UByteArray(size)
+    val bitShifted = ByteArray(size)
     bitShifted[size - 1] =
         shiftLeftBitsInBytes(this[size - 1], this[0], numberOfBitsToShiftWithoutBytes)
     (0 until (size - 1)).forEach {
@@ -36,7 +36,7 @@ fun UByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): UByteArray {
             shiftLeftBitsInBytes(this[it], this[it + 1], numberOfBitsToShiftWithoutBytes)
     }
 
-    val byteShifted = UByteArray(size)
+    val byteShifted = ByteArray(size)
     (0 until size - numberOfBytesToShift).forEach {
         byteShifted[it] = bitShifted[it + numberOfBytesToShift]
     }
@@ -46,23 +46,23 @@ fun UByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): UByteArray {
     return byteShifted
 }
 
-@ExperimentalUnsignedTypes
-fun UByteArray.shiftRightBits(numberOfBitsToShift: BigInteger): UByteArray {
+
+fun ByteArray.shiftRightBits(numberOfBitsToShift: BigInteger): ByteArray {
     if (isEmpty()) {
-        return UByteArray(0)
+        return ByteArray(0)
     }
     val (numberOfBytesToShift, numberOfBitsToShiftWithoutBytes) = numberOfBytesToShiftWithRest(
         this,
         numberOfBitsToShift
     )
 
-    val byteShifted = UByteArray(size)
+    val byteShifted = ByteArray(size)
     (0 until numberOfBytesToShift).forEach {
         byteShifted[it] = this[size + it - numberOfBytesToShift]
     }
     (numberOfBytesToShift until size).forEach { byteShifted[it] = this[it - numberOfBytesToShift] }
 
-    val bitShifted = UByteArray(size)
+    val bitShifted = ByteArray(size)
     bitShifted[0] = shiftRightBitsInBytes(
         byteShifted[size - 1],
         byteShifted[0],
@@ -79,9 +79,9 @@ fun UByteArray.shiftRightBits(numberOfBitsToShift: BigInteger): UByteArray {
     return bitShifted
 }
 
-@ExperimentalUnsignedTypes
+
 fun numberOfBytesToShiftWithRest(
-    data: UByteArray,
+    data: ByteArray,
     numberOfBitsToShift: BigInteger
 ): Pair<Int, Int> {
     val numberOfBitsToShiftWithoutSize =
