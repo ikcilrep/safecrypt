@@ -52,6 +52,35 @@ class VectorsTest {
         }
 
     }
+    @Test
+    fun testLongArrayMinus() {
+        val vectors = listOf(
+            Triple(longArrayOf(), longArrayOf(), longArrayOf()),
+            Triple(longArrayOf(1), longArrayOf(3), longArrayOf(-2)),
+            Triple(longArrayOf(53, -47), longArrayOf(21, 32), longArrayOf(32, -79)),
+            Triple(longArrayOf(16, 25, 3), longArrayOf(-36, -49, 2), longArrayOf(52, 74, 1))
+        )
+        for ((vector1, vector2, expectedResult) in vectors) {
+            val result1 = vector1 - vector2
+            assert(result1 contentEquals expectedResult)
+        }
+
+    }
+
+    @Test
+    fun testLongArrayMultiply() {
+        val vectors = listOf(
+            Triple(longArrayOf(), 23.toLong(), longArrayOf()),
+            Triple(longArrayOf(1), 37.toLong(), longArrayOf(37)),
+            Triple(longArrayOf(53, -47), 53.toLong(), longArrayOf(2809, -2491)),
+            Triple(longArrayOf(16, 25, 3), (-3).toLong(), longArrayOf(-48, -75, -9))
+        )
+        for ((vector1, multiplier, expectedResult) in vectors) {
+            val result1 = vector1 * multiplier
+            assert(result1 contentEquals expectedResult)
+        }
+
+    }
 
     @Test
     fun testIsZeroVector() {
