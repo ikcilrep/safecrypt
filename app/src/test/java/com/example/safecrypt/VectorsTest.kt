@@ -22,6 +22,21 @@ class VectorsTest {
             assertEquals(result1, expectedResult)
         }
     }
+    @Test
+    fun testLongArrayDotProduct() {
+        val vectors = listOf(
+            Triple(byteArrayOf(), longArrayOf(), 0.toLong()),
+            Triple(byteArrayOf(-3), longArrayOf(27), (-81).toLong()),
+            Triple(byteArrayOf(-1, 1), longArrayOf(2, 3), 1.toLong()),
+            Triple(byteArrayOf(2, 31, 54), longArrayOf(5, -46, 12), (-768).toLong()),
+            Triple(byteArrayOf(8, 12, -121, 90), longArrayOf(123, -57, 89, 13), (-9299).toLong())
+        )
+        for ((vector1, vector2, expectedResult) in vectors) {
+            val result1 = vector1.dotProduct(vector2)
+            assertEquals(result1, expectedResult)
+        }
+    }
+
 
     @Test
     fun testMinus() {

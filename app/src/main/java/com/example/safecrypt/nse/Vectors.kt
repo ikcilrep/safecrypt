@@ -8,6 +8,9 @@ fun ByteArray.dotProduct(other: ShortArray): Long =
 fun ByteArray.dotProduct(other: ByteArray): Long =
     foldIndexed(0.toLong()) { index, acc, el -> acc + (el.toLong() * other[index].toLong()) }
 
+fun ByteArray.dotProduct(other: LongArray): Long =
+    foldIndexed(0.toLong()) { index, acc, el -> acc + (el.toLong() * other[index]) }
+
 operator fun ByteArray.minus(other: ByteArray): ShortArray {
     if (other.size != size)
         throw IllegalStateException("Vectors sizes are different.")
