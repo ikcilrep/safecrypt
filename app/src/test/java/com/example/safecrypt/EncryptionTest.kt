@@ -13,11 +13,11 @@ class EncryptionTest {
     fun testEncrypt() {
         val salt = Random.nextBytes(16)
         val key = BigInteger(Random.nextBytes(32))
-        for (length in 0..128) {
+        for (length in 1..128) {
             val data = Random.nextBytes(length)
             val (encryptedData, iv) = encrypt(data, key, salt)
             val decryptedData = decrypt(encryptedData, key, iv, salt)
-            Assert.assertEquals(decryptedData, data)
+            Assert.assertTrue(decryptedData contentEquals  data)
         }
     }
 }
