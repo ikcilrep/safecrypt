@@ -3,15 +3,15 @@ package com.example.safecrypt.nse
 import java.math.BigInteger
 
 fun encrypt(data: ByteArray, key: BigInteger, salt: ByteArray): Pair<LongArray, ByteArray> {
-    /*val rightShifted = data.shiftRightBits(key)
+    val shiftedData = data.shiftRightBits(key)
     val derivedKey = deriveKey(data.size, key, salt)
-    val IV = generateIV(rightShifted.size, rightShifted, derivedKey)
-    val result = rightShifted * derivedKey.dotProduct(derivedKey) - derivedKey*derivedKey.dotProduct(rightShifted - IV)*2
-
-     */
-    TODO()
+    val IV = generateIV(shiftedData.size, shiftedData, derivedKey)
+    val result = shiftedData * derivedKey.dotProduct(derivedKey) - derivedKey*derivedKey.dotProduct(shiftedData - IV)*2
+    return Pair(result, IV)
 }
 
 
-fun decrypt(data: LongArray, key: BigInteger, iv: ByteArray, salt: ByteArray): ByteArray =
+fun decrypt(data: LongArray, key: BigInteger, iv: ByteArray, salt: ByteArray): ByteArray {
+    val derivedKey = deriveKey(data.size, key ,salt)
     TODO()
+}
