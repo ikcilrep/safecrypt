@@ -3,4 +3,10 @@
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="encrypt">Encrypt</string>
+    <string name="decrypt">Decrypt</string>
+    <string name="title_activity_password_type">password_type</string>
+    <string name="password">password</string>
+    <string name="enter">Enter</string>
+    <string name="type_password_here">Type password here!</string>
 </resources>
