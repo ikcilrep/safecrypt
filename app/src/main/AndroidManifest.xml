@@ -11,11 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".PasswordType"></activity>
-        <activity
-            android:name=".password_type"
-            android:label="@string/title_activity_password_type"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EncryptionPanel"></activity>
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

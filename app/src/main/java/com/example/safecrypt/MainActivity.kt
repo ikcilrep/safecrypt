@@ -1,12 +1,17 @@
 package com.example.safecrypt
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        button4.setOnClickListener {
+            val activity2Intent = Intent(applicationContext, EncryptionPanel::class.java)
+            startActivity(activity2Intent)
+        }
     }
 }
