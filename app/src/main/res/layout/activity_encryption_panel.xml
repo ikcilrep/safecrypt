@@ -7,44 +7,39 @@
     tools:context=".EncryptionPanel">
 
     <LinearLayout
-        android:layout_width="413dp"
-        android:layout_height="748dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#008B90AC"
+        android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/messageInput"
             android:layout_width="match_parent"
-            android:layout_height="302dp"
-            android:layout_margin="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="336dp"
+            android:autofillHints=""
+            android:background="#FFFFFF"
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine" />
 
         <View
-            android:id="@+id/divider2"
+            android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
 
-        <TextView
-            android:id="@+id/textView4"
+        <Button
+            android:id="@+id/copyButton"
             android:layout_width="match_parent"
-            android:layout_height="409dp"
-            android:layout_margin="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="TextView" />
+            android:layout_height="wrap_content"
+            android:text="@string/copy_to_clipboard" />
+
+        <TextView
+            android:id="@+id/resultView"
+            android:layout_width="match_parent"
+            android:layout_height="303dp"
+            android:background="#353434"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

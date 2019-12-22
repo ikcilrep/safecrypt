@@ -19,6 +19,7 @@ class VectorsTest {
             assertEquals(result1, expectedResult)
         }
     }
+
     @Test
     fun testLongArrayDotProduct() {
         val vectors = listOf(
@@ -64,6 +65,7 @@ class VectorsTest {
         }
 
     }
+
     @Test
     fun testLongArrayMinus() {
         val vectors = listOf(
@@ -78,6 +80,7 @@ class VectorsTest {
         }
 
     }
+
     @Test
     fun testLongArrayPlus() {
         val vectors = listOf(
@@ -122,6 +125,7 @@ class VectorsTest {
         }
 
     }
+
     @Test
     fun testIsZeroVector() {
         val vectors = listOf(

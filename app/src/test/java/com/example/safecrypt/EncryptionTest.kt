@@ -17,7 +17,7 @@ class EncryptionTest {
             val data = Random.nextBytes(length)
             val (encryptedData, iv) = encrypt(data, key, salt)
             val decryptedData = decrypt(encryptedData, key, iv, salt)
-            Assert.assertTrue(decryptedData contentEquals  data)
+            Assert.assertTrue(decryptedData contentEquals data)
         }
     }
 }

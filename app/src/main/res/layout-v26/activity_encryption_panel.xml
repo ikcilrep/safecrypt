@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/messageInput"
             android:layout_width="match_parent"
             android:layout_height="336dp"
             android:background="#FFFFFF"
@@ -29,7 +29,7 @@
             android:background="?android:attr/listDivider" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/copyButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/copy_to_clipboard" />

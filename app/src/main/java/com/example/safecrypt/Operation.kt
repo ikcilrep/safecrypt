@@ -1,6 +1,8 @@
 package com.example.safecrypt
 
-enum class Operations {
+enum class Operation {
     ENCRYPT,
     DECRYPT
 }
+
+lateinit var currentOperation: Operation

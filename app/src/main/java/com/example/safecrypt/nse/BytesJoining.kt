@@ -8,6 +8,6 @@ fun ByteArray.join(other: ByteArray): ByteArray =
 fun ByteArray.split(): Pair<ByteArray, ByteArray> {
     val addedSize = ByteBuffer.wrap(takeLast(4).toByteArray()).int
     val firstPart = take(size - addedSize - 4).toByteArray()
-    val secondPart = takeLast(addedSize+4).take(addedSize).toByteArray()
+    val secondPart = takeLast(addedSize + 4).take(addedSize).toByteArray()
     return Pair(firstPart, secondPart)
 }

@@ -15,7 +15,7 @@ class BitShiftingTest {
                 val data = Random.nextBytes(length)
                 val leftShiftedData = data.shiftLeftBits(numberToShift.toBigInteger())
                 val unLeftShiftedData = leftShiftedData.shiftRightBits(numberToShift.toBigInteger())
-                assertTrue(unLeftShiftedData contentEquals  data)
+                assertTrue(unLeftShiftedData contentEquals data)
             }
         }
     }
