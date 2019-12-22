@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="52dp"
-        android:text="@string/if_password_for_decryption_is_not_right_then_result_will_just_also_be_not_right_there_won_t_be_any_message_because_your_password_isn_t_stored_anywhere_so_i_can_t_compare_it_with_this_what_you_ve_just_typed"
+        android:text="@string/password_warning"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
@@ -48,12 +49,14 @@ class EncryptionPanel : AppCompatActivity() {
             val (cipherText, iv) = bytes.take(bytes.size - 16).toByteArray().split()
             resultView.text = decrypt(cipherText.toLongArray(), key, iv, salt).decodeToString()
         } catch (e: Exception) {
-            resultView.text = "This message can't be decrypted."
+            resultView.text = "This message can't be decrypted using this password."
+            resultView.setTextColor(Color.parseColor("#ff0000"))
         }
     }
 
     @ExperimentalStdlibApi
     private fun doOperation() {
+        resultView.setTextColor(Color.parseColor("#ffffff"))
         if (currentOperation == Operation.ENCRYPT) {
             doEncryption()
         } else {
