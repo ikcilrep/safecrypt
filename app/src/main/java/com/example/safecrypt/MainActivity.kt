@@ -2,7 +2,6 @@ package com.example.safecrypt
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.math.BigInteger
@@ -12,7 +11,7 @@ import java.security.SecureRandom
 lateinit var salt: ByteArray
 lateinit var key: BigInteger
 lateinit var password: String
-fun deriveKey(): BigInteger =
+fun deriveKeyFromPassword(password: String, salt: ByteArray): BigInteger =
     BigInteger(
         SCrypt.generate(
             password.toByteArray(),
@@ -25,6 +24,7 @@ fun deriveKey(): BigInteger =
     ).abs()
 
 class MainActivity : AppCompatActivity() {
+    private val secureRandom = SecureRandom()
     private fun goToEncryptionPanel() {
         val encryptionPanelIntent = Intent(applicationContext, EncryptionPanel::class.java)
         startActivity(encryptionPanelIntent)
@@ -35,7 +35,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         encryptButton.setOnClickListener {
+            salt = ByteArray(16)
+            secureRandom.nextBytes(salt)
             password = passwordInput.text.toString()
+            key = deriveKeyFromPassword(password, salt)
             currentOperation = Operation.ENCRYPT
             goToEncryptionPanel()
         }

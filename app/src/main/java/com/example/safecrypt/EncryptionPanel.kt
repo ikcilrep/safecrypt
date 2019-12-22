@@ -12,10 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.safecrypt.nse.*
 import kotlinx.android.synthetic.main.activity_encryption_panel.*
-import java.security.SecureRandom
 
 class EncryptionPanel : AppCompatActivity() {
-    private val secureRandom = SecureRandom()
 
     @SuppressLint("SetTextI18n")
     @ExperimentalStdlibApi
@@ -31,10 +29,6 @@ class EncryptionPanel : AppCompatActivity() {
 
     @ExperimentalStdlibApi
     private fun doEncryption() {
-        salt = ByteArray(16)
-        secureRandom.nextBytes(salt)
-        key = deriveKey()
-
         val (cipherText, iv) = encrypt(
             messageInput.text.toString().encodeToByteArray(),
             key,
@@ -50,7 +44,7 @@ class EncryptionPanel : AppCompatActivity() {
         try {
             val bytes = Base64.decode(messageInput.text.toString(), Base64.DEFAULT)
             salt = bytes.takeLast(16).toByteArray()
-            key = deriveKey()
+            key = deriveKeyFromPassword(password, salt)
             val (cipherText, iv) = bytes.take(bytes.size - 16).toByteArray().split()
             resultView.text = decrypt(cipherText.toLongArray(), key, iv, salt).decodeToString()
         } catch (e: Exception) {
