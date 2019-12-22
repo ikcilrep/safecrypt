@@ -5,32 +5,29 @@ import java.lang.IndexOutOfBoundsException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
-fun LongArray.toByteArray(): ByteArray {
-    var maxSize: Byte = 0
-    val notFlattenResult = List<ByteArray>(size) {
-        val result = ByteBuffer.allocate(8).putLong(this[it]).order(ByteOrder.BIG_ENDIAN).array()
-        if (result.size > maxSize) {
-            maxSize = result.size.toByte()
-        }
-        result
-    }
-
-    return notFlattenResult.flatMap { it.takeLast( maxSize.toInt()) }.toByteArray() + maxSize
-}
+fun LongArray.toByteArray(): ByteArray =
+    flatMap {
+        val result = ByteBuffer.allocate(8).putLong(it).order(ByteOrder.BIG_ENDIAN).array()
+        val realSize = 8 - result.takeWhile { byte -> byte == 0.toByte() }.size
+        listOf(realSize.toByte()) + result.takeLast(realSize)
+    }.toByteArray()
 
 fun ByteArray.toLongArray(): LongArray {
-    val maxSize: Byte = this[size -1]
-    if (maxSize == 0.toByte()) {
-        return LongArray(0)
-    }
-    val result = LongArray((size - 1) / maxSize)
+    var byteIndex = 0
+    var index = 0
+    val result = LongArray(size)
     try {
-        for ((resultIndex, index) in (0 until size-1 step maxSize.toInt()).withIndex()) {
-            result[resultIndex] = ByteBuffer.wrap(sliceArray(index until index + maxSize)).long
-
+        while (byteIndex < size) {
+            result[index] =
+                ByteBuffer.wrap(ByteArray(8 - this[byteIndex]) + sliceArray((byteIndex + 1)..byteIndex + this[byteIndex]))
+                    .order(
+                        ByteOrder.BIG_ENDIAN
+                    ).long
+            byteIndex += this[byteIndex] + 1
+            index++
         }
     } catch (e: IndexOutOfBoundsException) {
-        throw IllegalArgumentException("This array can't be converted into LongArray.")
+        throw IllegalArgumentException("This array cannot be converted into LongArray.")
     }
-    return result
+    return result.take(index).toLongArray()
 }

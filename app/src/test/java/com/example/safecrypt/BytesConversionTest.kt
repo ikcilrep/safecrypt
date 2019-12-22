@@ -10,10 +10,13 @@ class BytesConversionTest {
     @Test
     fun testLongArrayToByteArray() {
         for (length1 in 0..128) {
-            val data = LongArray(length1) { Random.nextLong()}
+            val data = LongArray(length1) { Random.nextLong() }
+            println(data.joinToString())
             val convertedData = data.toByteArray()
+            println(convertedData.joinToString())
             val unconvertedData = convertedData.toLongArray()
-            assertTrue(data contentEquals  unconvertedData)
+            println(unconvertedData.joinToString())
+            assertTrue(data contentEquals unconvertedData)
         }
     }
 }
