@@ -6,7 +6,6 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
 import android.util.Base64
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -26,8 +25,6 @@ class EncryptionPanel : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         setNonConstantTexts()
-
-        resultView.movementMethod = ScrollingMovementMethod()
 
         messageInput.addTextChangedListener {doOperation()}
 
