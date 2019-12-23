@@ -57,21 +57,24 @@ class EncryptionPanel : AppCompatActivity() {
 
     @ExperimentalStdlibApi
     private fun doDecryption() {
-        try {
-            val bytes = Base64.decode(messageInput.text.toString(), Base64.DEFAULT)
-            salt = bytes.takeLast(16).toByteArray()
-            key = deriveKeyFromPassword(password, salt)
-            val (cipherText, iv) = bytes.take(bytes.size - 16).toByteArray().split()
-            resultView.text = decrypt(cipherText.toLongArray(), key, iv, salt).decodeToString()
-        } catch (e: Exception) {
-            resultView.text = getString(R.string.decryption_error)
-            resultView.setTextColor(Color.parseColor("#ff0000"))
+        if (messageInput.text.toString().isNotEmpty()) {
+            try {
+                val bytes = Base64.decode(messageInput.text.toString(), Base64.DEFAULT)
+                salt = bytes.takeLast(16).toByteArray()
+                key = deriveKeyFromPassword(password, salt)
+                val (cipherText, iv) = bytes.take(bytes.size - 16).toByteArray().split()
+                resultView.text = decrypt(cipherText.toLongArray(), key, iv, salt).decodeToString()
+            } catch (e: Exception) {
+                resultView.text = getString(R.string.decryption_error)
+                resultView.setTextColor(Color.parseColor("#ff0000"))
+            }
         }
     }
 
     @ExperimentalStdlibApi
     private fun doOperation() {
         resultView.setTextColor(Color.parseColor("#ffffff"))
+        resultView.text = ""
         when(currentOperation) {
             Operation.ENCRYPT -> doEncryption()
             Operation.DECRYPT -> doDecryption()
