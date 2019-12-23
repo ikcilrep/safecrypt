@@ -1,10 +1,12 @@
 package com.example.safecrypt
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import org.bouncycastle.crypto.generators.SCrypt
@@ -28,22 +30,26 @@ fun deriveKeyFromPassword(password: String, salt: ByteArray): BigInteger =
     ).abs()
 
 class MainActivity : AppCompatActivity() {
-    lateinit var  mAdView : AdView
     private val secureRandom = SecureRandom()
     private fun goToEncryptionPanel() {
         val encryptionPanelIntent = Intent(applicationContext, EncryptionPanel::class.java)
         startActivity(encryptionPanelIntent)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+
+        val drawableMainColor = ColorDrawable(ResourcesCompat.getColor(resources, R.color.main_color, null))
+        supportActionBar?.setBackgroundDrawable(drawableMainColor)
+
         MobileAds.initialize(
             this
         ) { }
-        mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        adView.loadAd(adRequest)
 
         encryptButton.setOnClickListener {
             salt = ByteArray(16)

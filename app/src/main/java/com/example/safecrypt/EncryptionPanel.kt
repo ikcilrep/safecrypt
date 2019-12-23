@@ -1,15 +1,18 @@
 package com.example.safecrypt
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
 import com.example.safecrypt.nse.*
 import kotlinx.android.synthetic.main.activity_encryption_panel.*
@@ -17,12 +20,17 @@ import kotlinx.android.synthetic.main.activity_encryption_panel.*
 
 class EncryptionPanel : AppCompatActivity() {
 
+    @SuppressLint("ResourceAsColor")
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encryption_panel)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val drawableMainColor = ColorDrawable(ResourcesCompat.getColor(resources, R.color.main_color, null))
+
+        supportActionBar?.setBackgroundDrawable(drawableMainColor)
 
         setNonConstantTexts()
 
