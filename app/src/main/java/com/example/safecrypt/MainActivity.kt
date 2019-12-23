@@ -3,10 +3,14 @@ package com.example.safecrypt
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
-import java.math.BigInteger
 import org.bouncycastle.crypto.generators.SCrypt
+import java.math.BigInteger
 import java.security.SecureRandom
+
 
 lateinit var salt: ByteArray
 lateinit var key: BigInteger
@@ -24,6 +28,7 @@ fun deriveKeyFromPassword(password: String, salt: ByteArray): BigInteger =
     ).abs()
 
 class MainActivity : AppCompatActivity() {
+    lateinit var  mAdView : AdView
     private val secureRandom = SecureRandom()
     private fun goToEncryptionPanel() {
         val encryptionPanelIntent = Intent(applicationContext, EncryptionPanel::class.java)
@@ -33,6 +38,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        MobileAds.initialize(
+            this
+        ) { }
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         encryptButton.setOnClickListener {
             salt = ByteArray(16)

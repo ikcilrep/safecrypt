@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5128133686771245~1189265267"/>
         <activity android:name=".EncryptionPanel"></activity>
         <activity
             android:name=".MainActivity"
