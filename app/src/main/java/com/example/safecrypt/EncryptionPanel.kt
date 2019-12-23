@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_encryption_panel.*
 
 class EncryptionPanel : AppCompatActivity() {
 
+    @ExperimentalUnsignedTypes
     @SuppressLint("ResourceAsColor")
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +39,10 @@ class EncryptionPanel : AppCompatActivity() {
 
         resultView.setOnClickListener {hideKeyboard(this)}
 
-        copyButton.setOnClickListener (::copyToClipboard)
+        copyButton.setOnClickListener {copyToClipboard()}
     }
 
+    @ExperimentalUnsignedTypes
     @ExperimentalStdlibApi
     private fun doEncryption() {
         val (cipherText, iv) = encrypt(
@@ -52,6 +54,7 @@ class EncryptionPanel : AppCompatActivity() {
             Base64.encodeToString(cipherText.toByteArray().join(iv) + salt, Base64.DEFAULT)
     }
 
+    @ExperimentalUnsignedTypes
     @ExperimentalStdlibApi
     private fun setNonConstantTexts() {
         when(currentOperation) {
@@ -67,6 +70,7 @@ class EncryptionPanel : AppCompatActivity() {
         }
     }
 
+    @ExperimentalUnsignedTypes
     @ExperimentalStdlibApi
     private fun doDecryption() {
         if (messageInput.text.toString().isNotEmpty()) {
@@ -83,6 +87,7 @@ class EncryptionPanel : AppCompatActivity() {
         }
     }
 
+    @ExperimentalUnsignedTypes
     @ExperimentalStdlibApi
     private fun doOperation() {
         resultView.setTextColor(Color.parseColor("#ffffff"))
@@ -105,7 +110,7 @@ class EncryptionPanel : AppCompatActivity() {
     }
 
 
-    private fun copyToClipboard(view: View) {
+    private fun copyToClipboard() {
         val clipboard: ClipboardManager =
             getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText(messageInput.text.toString(), resultView.text.toString())

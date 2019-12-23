@@ -4,20 +4,25 @@ import java.math.BigInteger
 import kotlin.experimental.or
 
 
+@ExperimentalUnsignedTypes
 infix fun Byte.shl(shift: Int): Byte = (this.toUByte().toInt() shl shift).toByte()
 
 
+@ExperimentalUnsignedTypes
 infix fun Byte.shr(shift: Int): Byte = (this.toUByte().toInt() shr shift).toByte()
 
 
+@ExperimentalUnsignedTypes
 fun shiftLeftBitsInBytes(byte1: Byte, byte2: Byte, numberOfBitsToShift: Int): Byte =
     (byte1 shl numberOfBitsToShift) or (byte2 shr (8 - numberOfBitsToShift))
 
 
+@ExperimentalUnsignedTypes
 fun shiftRightBitsInBytes(byte1: Byte, byte2: Byte, numberOfBitsToShift: Int): Byte =
     (byte1 shl (8 - numberOfBitsToShift)) or (byte2 shr numberOfBitsToShift)
 
 
+@ExperimentalUnsignedTypes
 fun ByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): ByteArray {
     if (isEmpty()) {
         return ByteArray(0)
@@ -47,6 +52,7 @@ fun ByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): ByteArray {
 }
 
 
+@ExperimentalUnsignedTypes
 fun ByteArray.shiftRightBits(numberOfBitsToShift: BigInteger): ByteArray {
     if (isEmpty()) {
         return ByteArray(0)

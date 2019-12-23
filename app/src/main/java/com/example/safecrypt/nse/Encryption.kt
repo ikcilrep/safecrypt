@@ -2,6 +2,7 @@ package com.example.safecrypt.nse
 
 import java.math.BigInteger
 
+@ExperimentalUnsignedTypes
 fun encrypt(data: ByteArray, key: BigInteger, salt: ByteArray): Pair<LongArray, ByteArray> {
     if (data.isEmpty()) {
         return Pair(LongArray(0), ByteArray(0))
@@ -17,6 +18,7 @@ fun encrypt(data: ByteArray, key: BigInteger, salt: ByteArray): Pair<LongArray, 
 }
 
 
+@ExperimentalUnsignedTypes
 fun decrypt(data: LongArray, key: BigInteger, iv: ByteArray, salt: ByteArray): ByteArray {
     if (data.isEmpty()) {
         return ByteArray(0)
