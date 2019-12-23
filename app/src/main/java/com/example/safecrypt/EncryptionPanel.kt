@@ -49,7 +49,7 @@ class EncryptionPanel : AppCompatActivity() {
             val (cipherText, iv) = bytes.take(bytes.size - 16).toByteArray().split()
             resultView.text = decrypt(cipherText.toLongArray(), key, iv, salt).decodeToString()
         } catch (e: Exception) {
-            resultView.text = "This message can't be decrypted using this password."
+            resultView.text = getString(R.string.decryption_error)
             resultView.setTextColor(Color.parseColor("#ff0000"))
         }
     }

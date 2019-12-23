@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Safecrypt</string>
+
+    <string name="encrypt">Zaszyfruj</string>
+    <string name="decrypt">Odszyfruj</string>
+    <string name="password">Hasło</string>
+    <string name="enter">Enter</string>
+    <string name="type_password_here">Tutaj wpisz hasło!</string>
+    <string name="password_warning">*Jeśli hasło podane do odszyfrowania jest błędne, odszyfrowana wiadomość nie będzie miała sensu albo zostanie pokazany czerwony komunikat.</string>
+    <string name="decryption_error">
+        Ta wiadomość nie może być odszyfrowana używając podanego hasło.
+        Wiadomość lub hasło jest błędne.
+    </string>
+    <string name="copy_to_clipboard">Kopiuj</string>
+</resources>
