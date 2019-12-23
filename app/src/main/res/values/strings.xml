@@ -5,7 +5,7 @@
     <string name="decrypt">Decrypt</string>
     <string name="password">password</string>
     <string name="enter">Enter</string>
-    <string name="type_password_here">Type password here!</string>
+    <string name="type_password_here">You can enter the password here!</string>
     <string name="password_warning">
         *If password in decryption is not right then result won\'t be right or red error will appear.
     </string>
@@ -14,4 +14,5 @@
             This message can\'t be decrypted using this password.
             Message or password is wrong.
     </string>
+    <string name="message_hint">You can enter a message here.</string>
 </resources>

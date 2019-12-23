@@ -20,6 +20,7 @@
             android:background="#FFFFFF"
             android:ems="10"
             android:gravity="start|top"
+            android:hint="@string/message_hint"
             android:inputType="textMultiLine" />
 
         <View
