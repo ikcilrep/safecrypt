@@ -18,6 +18,9 @@ fun encrypt(data: ByteArray, key: BigInteger, salt: ByteArray): Pair<LongArray, 
 
 
 fun decrypt(data: LongArray, key: BigInteger, iv: ByteArray, salt: ByteArray): ByteArray {
+    if (data.isEmpty()) {
+        return ByteArray(0)
+    }
     val derivedKey = deriveKey(data.size, key, salt)
     val squaredDerivedKeyLength = derivedKey.dotProduct(derivedKey)
     val doubledDerivedKey = derivedKey * 2
