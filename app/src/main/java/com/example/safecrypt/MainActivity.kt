@@ -16,7 +16,7 @@ import java.security.SecureRandom
 
 lateinit var salt: ByteArray
 lateinit var key: BigInteger
-lateinit var password: String
+var password: String = ""
 fun deriveKeyFromPassword(password: String, salt: ByteArray): BigInteger =
     BigInteger(
         SCrypt.generate(
@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
         ) { }
         val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
+
+        passwordInput.setText(password)
 
         encryptButton.setOnClickListener {
             salt = ByteArray(16)
