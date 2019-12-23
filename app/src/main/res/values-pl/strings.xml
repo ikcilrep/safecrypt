@@ -14,5 +14,6 @@
     <string name="copy_to_clipboard">Kopiuj</string>
     <string name="encrypt_message_hint">Tutaj możesz napisać wiadomość!</string>
     <string name="decrypt_message_hint">Tutaj możesz wkleić zaszyfrowaną wiadomość!</string>
-
+    <string name="encrypt_title">Szyfrowanie</string>
+    <string name="decrypt_title">Odszyfrowywanie</string>
 </resources>

@@ -22,7 +22,9 @@ class EncryptionPanel : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encryption_panel)
 
-        setResultViewHint()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        setNonConstantTexts()
 
         messageInput.addTextChangedListener {doOperation()}
 
@@ -43,14 +45,16 @@ class EncryptionPanel : AppCompatActivity() {
     }
 
     @ExperimentalStdlibApi
-    private fun setResultViewHint() {
+    private fun setNonConstantTexts() {
         when(currentOperation) {
             Operation.ENCRYPT -> {
                 messageInput.hint = getString(R.string.encrypt_message_hint)
+                supportActionBar?.title = getString(R.string.encrypt_title)
                 doOperation()
             }
             Operation.DECRYPT -> {
                 messageInput.hint = getString(R.string.decrypt_message_hint)
+                supportActionBar?.title = getString(R.string.decrypt_title)
             }
         }
     }

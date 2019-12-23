@@ -16,4 +16,6 @@
     </string>
     <string name="encrypt_message_hint">You can write a message here.</string>
     <string name="decrypt_message_hint">You can paste an encrypted message here.</string>
+    <string name="encrypt_title">Encryption</string>
+    <string name="decrypt_title">Decryption</string>
 </resources>
