@@ -1,6 +1,5 @@
 package com.example.safecrypt
 
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -16,11 +15,15 @@ import kotlinx.android.synthetic.main.activity_encryption_panel.*
 
 class EncryptionPanel : AppCompatActivity() {
 
-    @SuppressLint("SetTextI18n")
     @ExperimentalStdlibApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encryption_panel)
+
+        if (currentOperation == Operation.ENCRYPT) {
+            doOperation()
+        }
+
         messageInput.addTextChangedListener {doOperation()}
 
         resultView.setOnClickListener (::hideKeyboard)
