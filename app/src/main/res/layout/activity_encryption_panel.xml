@@ -19,7 +19,8 @@
             android:ems="10"
             android:gravity="start|top"
             tools:ignore="Autofill,LabelFor"
-            android:inputType="textMultiLine" />
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"/>
 
         <View
             android:id="@+id/divider"
@@ -36,7 +37,7 @@
         <TextView
             android:id="@+id/resultView"
             android:layout_width="match_parent"
-            android:layout_height="303dp"
+            android:layout_height="350dp"
             android:background="#353434"
             android:textColor="#FFFFFF" />
 
