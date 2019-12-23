@@ -12,5 +12,7 @@
         Wiadomość lub hasło jest błędne.
     </string>
     <string name="copy_to_clipboard">Kopiuj</string>
-    <string name="message_hint">Tutaj możesz wpisać wiadomość!</string>
+    <string name="encrypt_message_hint">Tutaj możesz napisać wiadomość!</string>
+    <string name="decrypt_message_hint">Tutaj możesz wkleić zaszyfrowaną wiadomość!</string>
+
 </resources>

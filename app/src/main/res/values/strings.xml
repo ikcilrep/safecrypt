@@ -14,5 +14,6 @@
             This message can\'t be decrypted using this password.
             Message or password is wrong.
     </string>
-    <string name="message_hint">You can enter a message here.</string>
+    <string name="encrypt_message_hint">You can write a message here.</string>
+    <string name="decrypt_message_hint">You can paste an encrypted message here.</string>
 </resources>

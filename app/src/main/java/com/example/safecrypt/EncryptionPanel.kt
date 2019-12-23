@@ -20,9 +20,7 @@ class EncryptionPanel : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_encryption_panel)
 
-        if (currentOperation == Operation.ENCRYPT) {
-            doOperation()
-        }
+        setResultViewHint()
 
         messageInput.addTextChangedListener {doOperation()}
 
@@ -42,6 +40,18 @@ class EncryptionPanel : AppCompatActivity() {
             Base64.encodeToString(cipherText.toByteArray().join(iv) + salt, Base64.DEFAULT)
     }
 
+    @ExperimentalStdlibApi
+    private fun setResultViewHint() {
+        when(currentOperation) {
+            Operation.ENCRYPT -> {
+                messageInput.hint = getString(R.string.encrypt_message_hint)
+                doOperation()
+            }
+            Operation.DECRYPT -> {
+                messageInput.hint = getString(R.string.decrypt_message_hint)
+            }
+        }
+    }
 
     @ExperimentalStdlibApi
     private fun doDecryption() {
@@ -60,10 +70,9 @@ class EncryptionPanel : AppCompatActivity() {
     @ExperimentalStdlibApi
     private fun doOperation() {
         resultView.setTextColor(Color.parseColor("#ffffff"))
-        if (currentOperation == Operation.ENCRYPT) {
-            doEncryption()
-        } else {
-            doDecryption()
+        when(currentOperation) {
+            Operation.ENCRYPT -> doEncryption()
+            Operation.DECRYPT -> doDecryption()
         }
     }
 
