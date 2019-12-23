@@ -28,9 +28,9 @@ class EncryptionPanel : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val drawableMainColor = ColorDrawable(ResourcesCompat.getColor(resources, R.color.main_color, null))
+        val drawableActionBarColor = ColorDrawable(ResourcesCompat.getColor(resources, R.color.action_bar_color, null))
 
-        supportActionBar?.setBackgroundDrawable(drawableMainColor)
+        supportActionBar?.setBackgroundDrawable(drawableActionBarColor)
 
         setNonConstantTexts()
 

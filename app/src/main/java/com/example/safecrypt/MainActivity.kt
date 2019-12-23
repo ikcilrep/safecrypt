@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val drawableMainColor = ColorDrawable(ResourcesCompat.getColor(resources, R.color.main_color, null))
-        supportActionBar?.setBackgroundDrawable(drawableMainColor)
+        val drawableActionBarColor = ColorDrawable(ResourcesCompat.getColor(resources, R.color.action_bar_color, null))
+        supportActionBar?.setBackgroundDrawable(drawableActionBarColor)
 
         MobileAds.initialize(
             this

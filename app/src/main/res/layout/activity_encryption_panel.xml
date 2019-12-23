@@ -46,7 +46,7 @@
                     android:id="@+id/resultView"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
-                    android:background="@color/main_color"
+                    android:background="@color/result_view_color"
                     android:paddingBottom="5dp"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
