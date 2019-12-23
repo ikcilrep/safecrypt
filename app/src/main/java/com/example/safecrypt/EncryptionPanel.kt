@@ -1,5 +1,6 @@
 package com.example.safecrypt
 
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -13,6 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import com.example.safecrypt.nse.*
 import kotlinx.android.synthetic.main.activity_encryption_panel.*
 
+
 class EncryptionPanel : AppCompatActivity() {
 
     @ExperimentalStdlibApi
@@ -24,7 +26,7 @@ class EncryptionPanel : AppCompatActivity() {
 
         messageInput.addTextChangedListener {doOperation()}
 
-        resultView.setOnClickListener (::hideKeyboard)
+        resultView.setOnClickListener {hideKeyboard(this)}
 
         copyButton.setOnClickListener (::copyToClipboard)
     }
@@ -75,16 +77,18 @@ class EncryptionPanel : AppCompatActivity() {
             Operation.DECRYPT -> doDecryption()
         }
     }
-
-    private fun hideKeyboard(view: View) {
-        val inputManager: InputMethodManager =
-            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
-        inputManager.hideSoftInputFromWindow(
-            currentFocus!!.windowToken,
-            InputMethodManager.HIDE_NOT_ALWAYS
-        )
+    fun hideKeyboard(activity: Activity) {
+        val imm =
+            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view = activity.currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
 
     private fun copyToClipboard(view: View) {
         val clipboard: ClipboardManager =
