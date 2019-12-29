@@ -5,15 +5,15 @@
     <string name="decrypt">Odszyfruj</string>
     <string name="password">Hasło</string>
     <string name="enter">Enter</string>
-    <string name="type_password_here">W tym miejscu możesz wpisać hasło!</string>
+    <string name="type_password_here">Hasło do szyfrowania wiadomości.</string>
     <string name="password_warning">*Jeśli hasło podane do odszyfrowania jest błędne, odszyfrowana wiadomość nie będzie miała sensu albo zostanie pokazany czerwony komunikat.</string>
     <string name="decryption_error">
         Ta wiadomość nie może być odszyfrowana używając podanego hasło.
         Wiadomość lub hasło jest błędne.
     </string>
     <string name="copy_to_clipboard">Kopiuj</string>
-    <string name="encrypt_message_hint">Tutaj możesz napisać wiadomość!</string>
-    <string name="decrypt_message_hint">Tutaj możesz wkleić zaszyfrowaną wiadomość!</string>
+    <string name="encrypt_message_hint">Wiadomość.</string>
+    <string name="decrypt_message_hint">Zaszyfrowana wiadomość.</string>
     <string name="encrypt_title">Szyfrowanie</string>
     <string name="decrypt_title">Odszyfrowywanie</string>
 </resources>
