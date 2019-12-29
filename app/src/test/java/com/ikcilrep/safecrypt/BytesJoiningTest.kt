@@ -1,7 +1,7 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
-import com.example.safecrypt.nse.join
-import com.example.safecrypt.nse.split
+import com.ikcilrep.safecrypt.nse.join
+import com.ikcilrep.safecrypt.nse.split
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import kotlin.random.Random

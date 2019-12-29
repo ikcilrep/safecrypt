@@ -1,9 +1,9 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
-import com.example.safecrypt.nse.deriveKey
-import com.example.safecrypt.nse.dotProduct
-import com.example.safecrypt.nse.generateIV
-import com.example.safecrypt.nse.minus
+import com.ikcilrep.safecrypt.nse.deriveKey
+import com.ikcilrep.safecrypt.nse.dotProduct
+import com.ikcilrep.safecrypt.nse.generateIV
+import com.ikcilrep.safecrypt.nse.minus
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
@@ -16,7 +16,11 @@ class GenerationTest {
         for (length in 1..10) {
             val rotatedData = Random.nextBytes(length)
             val derivedKey = Random.nextBytes(length)
-            val iv = generateIV(length, derivedKey, rotatedData)
+            val iv = generateIV(
+                length,
+                derivedKey,
+                rotatedData
+            )
             assertEquals(iv.size, length)
             assertNotEquals(derivedKey.dotProduct(rotatedData - iv), 0.toLong())
         }
@@ -27,7 +31,8 @@ class GenerationTest {
         for (length in 1..10) {
             val key = BigInteger(Random.nextBytes(length)).abs()
             val salt = Random.nextBytes(16)
-            val derivedKey = deriveKey(length, key, salt)
+            val derivedKey =
+                deriveKey(length, key, salt)
             assertEquals(derivedKey.size, length)
         }
     }

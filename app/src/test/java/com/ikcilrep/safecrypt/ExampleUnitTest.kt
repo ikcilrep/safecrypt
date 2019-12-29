@@ -1,4 +1,4 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
 import org.junit.Test
 

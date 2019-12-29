@@ -1,7 +1,7 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
-import com.example.safecrypt.nse.toByteArray
-import com.example.safecrypt.nse.toLongArray
+import com.ikcilrep.safecrypt.nse.toByteArray
+import com.ikcilrep.safecrypt.nse.toLongArray
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import kotlin.random.Random

@@ -1,4 +1,4 @@
-package com.example.safecrypt.nse
+package com.ikcilrep.safecrypt.nse
 
 import java.math.BigInteger
 import kotlin.experimental.or
@@ -35,10 +35,18 @@ fun ByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): ByteArray {
 
     val bitShifted = ByteArray(size)
     bitShifted[size - 1] =
-        shiftLeftBitsInBytes(this[size - 1], this[0], numberOfBitsToShiftWithoutBytes)
+        shiftLeftBitsInBytes(
+            this[size - 1],
+            this[0],
+            numberOfBitsToShiftWithoutBytes
+        )
     (0 until (size - 1)).forEach {
         bitShifted[it] =
-            shiftLeftBitsInBytes(this[it], this[it + 1], numberOfBitsToShiftWithoutBytes)
+            shiftLeftBitsInBytes(
+                this[it],
+                this[it + 1],
+                numberOfBitsToShiftWithoutBytes
+            )
     }
 
     val byteShifted = ByteArray(size)

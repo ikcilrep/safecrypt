@@ -1,4 +1,4 @@
-package com.example.safecrypt.nse
+package com.ikcilrep.safecrypt.nse
 
 import org.bouncycastle.crypto.digests.SHA512Digest
 import org.bouncycastle.crypto.generators.HKDFBytesGenerator

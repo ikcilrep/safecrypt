@@ -1,7 +1,7 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
-import com.example.safecrypt.nse.shiftLeftBits
-import com.example.safecrypt.nse.shiftRightBits
+import com.ikcilrep.safecrypt.nse.shiftLeftBits
+import com.ikcilrep.safecrypt.nse.shiftRightBits
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import kotlin.random.Random

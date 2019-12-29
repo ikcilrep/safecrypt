@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.safecrypt">
+    package="com.ikcilrep.safecrypt">
 
     <application
         android:allowBackup="true"
@@ -17,7 +17,8 @@
 
         <activity
             android:name=".EncryptionPanel"
-            android:parentActivityName="com.example.safecrypt.MainActivity" />
+            android:parentActivityName="com.ikcilrep.safecrypt.MainActivity"
+            tools:targetApi="jelly_bean" />
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

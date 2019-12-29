@@ -1,7 +1,7 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
-import com.example.safecrypt.nse.decrypt
-import com.example.safecrypt.nse.encrypt
+import com.ikcilrep.safecrypt.nse.decrypt
+import com.ikcilrep.safecrypt.nse.encrypt
 import org.junit.Assert
 import org.junit.Test
 import java.math.BigInteger
@@ -15,8 +15,13 @@ class EncryptionTest {
         val key = BigInteger(Random.nextBytes(32))
         for (length in 1..128) {
             val data = Random.nextBytes(length)
-            val (encryptedData, iv) = encrypt(data, key, salt)
-            val decryptedData = decrypt(encryptedData, key, iv, salt)
+            val (encryptedData, iv) = encrypt(
+                data,
+                key,
+                salt
+            )
+            val decryptedData =
+                decrypt(encryptedData, key, iv, salt)
             Assert.assertTrue(decryptedData contentEquals data)
         }
     }

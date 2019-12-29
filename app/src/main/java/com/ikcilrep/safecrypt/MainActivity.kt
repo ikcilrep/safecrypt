@@ -1,4 +1,4 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -42,7 +42,8 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        val drawableActionBarColor = ColorDrawable(ResourcesCompat.getColor(resources, R.color.action_bar_color, null))
+        val drawableActionBarColor = ColorDrawable(ResourcesCompat.getColor(resources,
+            R.color.action_bar_color, null))
         supportActionBar?.setBackgroundDrawable(drawableActionBarColor)
 
         MobileAds.initialize(
@@ -57,14 +58,20 @@ class MainActivity : AppCompatActivity() {
             salt = ByteArray(16)
             secureRandom.nextBytes(salt)
             password = passwordInput.text.toString()
-            key = deriveKeyFromPassword(password, salt)
-            currentOperation = Operation.ENCRYPT
+            key =
+                deriveKeyFromPassword(
+                    password,
+                    salt
+                )
+            currentOperation =
+                Operation.ENCRYPT
             goToEncryptionPanel()
         }
 
         decryptButton.setOnClickListener {
             password = passwordInput.text.toString()
-            currentOperation = Operation.DECRYPT
+            currentOperation =
+                Operation.DECRYPT
             goToEncryptionPanel()
         }
     }

@@ -1,4 +1,4 @@
-package com.example.safecrypt.nse
+package com.ikcilrep.safecrypt.nse
 
 import java.lang.IllegalArgumentException
 import java.lang.IndexOutOfBoundsException

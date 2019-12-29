@@ -1,4 +1,4 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -14,7 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
-import com.example.safecrypt.nse.*
+import com.ikcilrep.safecrypt.nse.*
 import kotlinx.android.synthetic.main.activity_encryption_panel.*
 
 
@@ -29,7 +29,8 @@ class EncryptionPanel : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val drawableActionBarColor = ColorDrawable(ResourcesCompat.getColor(resources, R.color.action_bar_color, null))
+        val drawableActionBarColor = ColorDrawable(ResourcesCompat.getColor(resources,
+            R.color.action_bar_color, null))
 
         supportActionBar?.setBackgroundDrawable(drawableActionBarColor)
 
@@ -77,9 +78,18 @@ class EncryptionPanel : AppCompatActivity() {
             try {
                 val bytes = Base64.decode(messageInput.text.toString(), Base64.DEFAULT)
                 salt = bytes.takeLast(16).toByteArray()
-                key = deriveKeyFromPassword(password, salt)
+                key =
+                    deriveKeyFromPassword(
+                        password,
+                        salt
+                    )
                 val (cipherText, iv) = bytes.take(bytes.size - 16).toByteArray().split()
-                resultView.text = decrypt(cipherText.toLongArray(), key, iv, salt).decodeToString()
+                resultView.text = decrypt(
+                    cipherText.toLongArray(),
+                    key,
+                    iv,
+                    salt
+                ).decodeToString()
             } catch (e: Exception) {
                 resultView.text = getString(R.string.decryption_error)
                 resultView.setTextColor(Color.parseColor("#ff0000"))

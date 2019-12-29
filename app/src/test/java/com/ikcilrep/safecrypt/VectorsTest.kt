@@ -1,6 +1,6 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
-import com.example.safecrypt.nse.*
+import com.ikcilrep.safecrypt.nse.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

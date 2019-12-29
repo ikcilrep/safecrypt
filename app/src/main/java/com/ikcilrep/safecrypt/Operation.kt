@@ -1,4 +1,4 @@
-package com.example.safecrypt
+package com.ikcilrep.safecrypt
 
 enum class Operation {
     ENCRYPT,
