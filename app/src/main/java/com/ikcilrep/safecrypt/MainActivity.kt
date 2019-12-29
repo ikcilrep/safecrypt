@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
@@ -30,10 +33,22 @@ fun deriveKeyFromPassword(password: String, salt: ByteArray): BigInteger =
     ).abs()
 
 class MainActivity : AppCompatActivity() {
+    private var isPasswordShown = false
     private val secureRandom = SecureRandom()
+
     private fun goToEncryptionPanel() {
         val encryptionPanelIntent = Intent(applicationContext, EncryptionPanel::class.java)
         startActivity(encryptionPanelIntent)
+    }
+
+    private fun togglePasswordVisibility(view: View) {
+        isPasswordShown = !isPasswordShown
+        if (isPasswordShown) {
+            passwordInput.transformationMethod = PasswordTransformationMethod.getInstance()
+        } else {
+            passwordInput.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        }
+
     }
 
     @SuppressLint("ResourceAsColor")
@@ -74,6 +89,8 @@ class MainActivity : AppCompatActivity() {
                 Operation.DECRYPT
             goToEncryptionPanel()
         }
+
+        showPasswordButton.setOnClickListener(::togglePasswordVisibility)
     }
 
 
