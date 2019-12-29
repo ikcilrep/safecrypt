@@ -16,5 +16,5 @@
     <string name="decrypt_message_hint">Zaszyfrowana wiadomość.</string>
     <string name="encrypt_title">Szyfrowanie</string>
     <string name="decrypt_title">Odszyfrowywanie</string>
-    <string name="show_password">Pokaż hasłogt</string>
+    <string name="show_password">Pokaż hasło</string>
 </resources>
