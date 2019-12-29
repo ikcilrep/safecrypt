@@ -18,4 +18,5 @@
     <string name="decrypt_message_hint">Encrypted message.</string>
     <string name="encrypt_title">Encryption</string>
     <string name="decrypt_title">Decryption</string>
+    <string name="show_password">Show password</string>
 </resources>

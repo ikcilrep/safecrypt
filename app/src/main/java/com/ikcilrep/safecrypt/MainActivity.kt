@@ -23,7 +23,6 @@ var password: String = ""
 
 
 class MainActivity : AppCompatActivity() {
-    private var isPasswordShown = false
     private val secureRandom = SecureRandom()
 
     private fun goToEncryptionPanel() {
@@ -31,12 +30,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(encryptionPanelIntent)
     }
 
-    private fun togglePasswordVisibility(view: View) {
-        isPasswordShown = !isPasswordShown
-        if (isPasswordShown) {
-            passwordInput.transformationMethod = PasswordTransformationMethod.getInstance()
-        } else {
+    private fun togglePasswordVisibility(buttonView: View, isChecked: Boolean) {
+        if (isChecked) {
             passwordInput.transformationMethod = HideReturnsTransformationMethod.getInstance()
+        } else {
+            passwordInput.transformationMethod = PasswordTransformationMethod.getInstance()
         }
 
     }
@@ -80,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             goToEncryptionPanel()
         }
 
-        showPasswordButton.setOnClickListener(::togglePasswordVisibility)
+        showPasswordSwitch.setOnCheckedChangeListener (::togglePasswordVisibility)
     }
 
 
