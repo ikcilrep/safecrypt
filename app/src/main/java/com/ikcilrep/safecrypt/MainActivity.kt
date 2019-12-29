@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.ikcilrep.safecrypt.nse.deriveKeyFromPassword
 import kotlinx.android.synthetic.main.activity_main.*
-import org.bouncycastle.crypto.generators.SCrypt
 import java.math.BigInteger
 import java.security.SecureRandom
 
@@ -20,17 +20,7 @@ import java.security.SecureRandom
 lateinit var salt: ByteArray
 lateinit var key: BigInteger
 var password: String = ""
-fun deriveKeyFromPassword(password: String, salt: ByteArray): BigInteger =
-    BigInteger(
-        SCrypt.generate(
-            password.toByteArray(),
-            salt,
-            16384,
-            8,
-            1,
-            33
-        )
-    ).abs()
+
 
 class MainActivity : AppCompatActivity() {
     private var isPasswordShown = false

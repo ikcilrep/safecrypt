@@ -107,7 +107,7 @@ class EncryptionPanel : AppCompatActivity() {
             Operation.DECRYPT -> doDecryption()
         }
     }
-    fun hideKeyboard(activity: Activity) {
+    private fun hideKeyboard(activity: Activity) {
         val imm =
             activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         //Find the currently focused view, so we can grab the correct window token from it.

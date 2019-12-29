@@ -2,6 +2,7 @@ package com.ikcilrep.safecrypt.nse
 
 import org.bouncycastle.crypto.digests.SHA512Digest
 import org.bouncycastle.crypto.generators.HKDFBytesGenerator
+import org.bouncycastle.crypto.generators.SCrypt
 import org.bouncycastle.crypto.params.HKDFParameters
 import java.math.BigInteger
 import java.security.SecureRandom
@@ -30,3 +31,15 @@ fun deriveKey(length: Int, key: BigInteger, salt: ByteArray): ByteArray {
 
     return derivedKey
 }
+
+fun deriveKeyFromPassword(password: String, salt: ByteArray): BigInteger =
+    BigInteger(
+        SCrypt.generate(
+            password.toByteArray(),
+            salt,
+            16384,
+            8,
+            1,
+            33
+        )
+    ).abs()
