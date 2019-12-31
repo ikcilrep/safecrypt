@@ -27,11 +27,29 @@
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
 
-        <Button
-            android:id="@+id/copyButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/copy_to_clipboard" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/copyButton"
+                android:layout_width="252dp"
+                android:layout_height="wrap_content"
+                android:background="#00E676"
+                android:text="@string/copy_to_clipboard"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/clearButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FF1744"
+                android:text="@string/clear"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"

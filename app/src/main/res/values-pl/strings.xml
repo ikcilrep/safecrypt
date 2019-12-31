@@ -17,4 +17,7 @@
     <string name="encrypt_title">Szyfrowanie</string>
     <string name="decrypt_title">Odszyfrowywanie</string>
     <string name="show_password">Pokaż hasło</string>
+    <string name="clear">Wyczyść</string>
+    <string name="copiedToast">Skopiowano!</string>
+    <string name="clearedToast">Wyczyszczono!</string>
 </resources>

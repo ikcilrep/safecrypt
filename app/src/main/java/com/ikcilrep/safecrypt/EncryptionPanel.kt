@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
@@ -40,7 +41,9 @@ class EncryptionPanel : AppCompatActivity() {
 
         resultView.setOnClickListener {hideKeyboard(this)}
 
-        copyButton.setOnClickListener {copyToClipboard()}
+        copyButton.setOnClickListener(::copyToClipboard)
+
+        clearButton.setOnClickListener(::clearMessage)
     }
 
     @ExperimentalUnsignedTypes
@@ -120,11 +123,17 @@ class EncryptionPanel : AppCompatActivity() {
     }
 
 
-    private fun copyToClipboard() {
+    private fun copyToClipboard(view: View) {
         val clipboard: ClipboardManager =
             getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText(messageInput.text.toString(), resultView.text.toString())
         clipboard.setPrimaryClip(clip)
+        Toast.makeText(applicationContext, getString(R.string.copiedToast), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun clearMessage(view: View) {
+        messageInput.text.clear()
+        Toast.makeText(applicationContext, getString(R.string.clearedToast), Toast.LENGTH_SHORT).show()
     }
 }
 
