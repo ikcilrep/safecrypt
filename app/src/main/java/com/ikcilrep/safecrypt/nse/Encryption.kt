@@ -11,8 +11,8 @@ fun encrypt(data: ByteArray, key: BigInteger, salt: ByteArray): Pair<LongArray, 
     val derivedKey = deriveKey(data.size, key, salt)
     val iv = generateIV(
         shiftedData.size,
-        shiftedData,
-        derivedKey
+        derivedKey,
+        shiftedData
     )
     val result =
         shiftedData * derivedKey.dotProduct(derivedKey) - derivedKey * derivedKey.dotProduct(
