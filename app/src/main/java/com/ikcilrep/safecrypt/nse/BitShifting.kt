@@ -1,8 +1,9 @@
 package com.ikcilrep.safecrypt.nse
 
+import org.bouncycastle.crypto.Digest
 import java.math.BigInteger
 import kotlin.experimental.or
-
+import org.bouncycastle.crypto.digests.SHA256Digest
 
 @ExperimentalUnsignedTypes
 infix fun Byte.shl(shift: Int): Byte = (this.toUByte().toInt() shl shift).toByte()
@@ -20,6 +21,15 @@ fun shiftLeftBitsInBytes(byte1: Byte, byte2: Byte, numberOfBitsToShift: Int): By
 @ExperimentalUnsignedTypes
 fun shiftRightBitsInBytes(byte1: Byte, byte2: Byte, numberOfBitsToShift: Int): Byte =
     (byte1 shl (8 - numberOfBitsToShift)) or (byte2 shr numberOfBitsToShift)
+
+fun digestInteger(number: BigInteger): BigInteger {
+    val hash = SHA256Digest()
+    val result  = ByteArray(hash.digestSize)
+    val bytes = number.toByteArray()
+    hash.update(bytes, 0, bytes.size)
+    hash.doFinal(result, 0)
+    return BigInteger(result)
+}
 
 
 @ExperimentalUnsignedTypes

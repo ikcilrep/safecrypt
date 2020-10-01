@@ -14,7 +14,8 @@ fun encrypt(data: ByteArray, key: BigInteger): CipherText {
     val random = SecureRandom()
     val randomData = ByteArray(512 - data.size % 256);
     random.nextBytes(randomData)
-    val shiftedData = (data + randomData).cycleRightBits(key)
+    val digestedKey = digestInteger(key)
+    val shiftedData = (data + randomData).cycleRightBits(digestedKey)
     var encrypted = longArrayOf(data.size.toLong(), saltSize.toLong(), blockSize.toLong())
     var ivs = ByteArray(0)
     var salts = ByteArray(0)
@@ -52,7 +53,7 @@ fun decrypt(data: LongArray, key: BigInteger, ivs: ByteArray, salts: ByteArray):
 
 
     var decrypted = ByteArray(0);
-    (3 until data.size).step(blockSize).forEachIndexed { index , _ ->
+    (3 until data.size).step(blockSize).forEachIndexed { index, _ ->
         val block = data.drop(index * blockSize + 3).take(blockSize).toLongArray()
         val salt = salts.drop(index * saltSize).take(saltSize).toByteArray()
         val iv = ivs.drop(index * blockSize).take(blockSize).toByteArray()
@@ -71,5 +72,6 @@ fun decrypt(data: LongArray, key: BigInteger, ivs: ByteArray, salts: ByteArray):
         decrypted += d.map { it.toByte() }.toByteArray()
     }
 
-    return decrypted.cycleLeftBits(key).take(plainTextLength).toByteArray()
+    val digestedKey = digestInteger(key)
+    return decrypted.cycleLeftBits(digestedKey).take(plainTextLength).toByteArray()
 }
