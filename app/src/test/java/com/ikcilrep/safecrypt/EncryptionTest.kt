@@ -11,18 +11,15 @@ class EncryptionTest {
     @ExperimentalUnsignedTypes
     @Test
     fun testEncrypt() {
-        val salt = Random.nextBytes(16)
         val key = BigInteger(Random.nextBytes(32))
-        for (length in 1..128) {
-            val data = Random.nextBytes(length)
-            val (encryptedData, iv) = encrypt(
-                data,
-                key,
-                salt
-            )
-            val decryptedData =
-                decrypt(encryptedData, key, iv, salt)
-            Assert.assertTrue(decryptedData contentEquals data)
-        }
+        val length = 16001
+        val data = Random.nextBytes(length)
+        val cipherText = encrypt(
+            data,
+            key
+        )
+        val decryptedData =
+            decrypt(cipherText.encryptedData, key, cipherText.ivs, cipherText.salts)
+        Assert.assertTrue(decryptedData contentEquals data)
     }
 }

@@ -1,9 +1,6 @@
 package com.ikcilrep.safecrypt
 
-import com.ikcilrep.safecrypt.nse.deriveKey
-import com.ikcilrep.safecrypt.nse.dotProduct
-import com.ikcilrep.safecrypt.nse.generateIV
-import com.ikcilrep.safecrypt.nse.minus
+import com.ikcilrep.safecrypt.nse.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
@@ -15,7 +12,7 @@ class GenerationTest {
     fun testGenerateIV() {
         for (length in 1..10) {
             val rotatedData = Random.nextBytes(length)
-            val derivedKey = Random.nextBytes(length)
+            val derivedKey = Random.nextBytes(length).mapPrimes()
             val iv = generateIV(
                 length,
                 derivedKey,

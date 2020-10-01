@@ -7,7 +7,9 @@ import org.bouncycastle.crypto.params.HKDFParameters
 import java.math.BigInteger
 import java.security.SecureRandom
 
-fun generateIV(length: Int, derivedKey: ByteArray, rotatedData: ByteArray): ByteArray {
+
+@ExperimentalUnsignedTypes
+fun generateIV(length: Int, derivedKey: UShortArray, rotatedData: ByteArray): ByteArray {
     if (length < 1)
         throw IllegalStateException("Length is not positive.")
     var iv: ByteArray
@@ -19,17 +21,15 @@ fun generateIV(length: Int, derivedKey: ByteArray, rotatedData: ByteArray): Byte
     return iv
 }
 
-fun deriveKey(length: Int, key: BigInteger, salt: ByteArray): ByteArray {
+@ExperimentalUnsignedTypes
+fun deriveKey(length: Int, key: BigInteger, salt: ByteArray): UShortArray {
     val hkdf = HKDFBytesGenerator(SHA512Digest())
     hkdf.init(HKDFParameters(key.toByteArray(), salt, byteArrayOf()))
 
-    var derivedKey: ByteArray
-    do {
-        derivedKey = ByteArray(length)
-        hkdf.generateBytes(derivedKey, 0, derivedKey.size)
-    } while (derivedKey.isZeroVector())
+    val derivedKey = ByteArray(length);
+    hkdf.generateBytes(derivedKey, 0, derivedKey.size)
 
-    return derivedKey
+    return derivedKey.mapPrimes()
 }
 
 fun deriveKeyFromPassword(password: String, salt: ByteArray): BigInteger =
