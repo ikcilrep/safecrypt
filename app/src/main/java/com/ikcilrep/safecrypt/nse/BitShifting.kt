@@ -23,7 +23,7 @@ fun shiftRightBitsInBytes(byte1: Byte, byte2: Byte, numberOfBitsToShift: Int): B
 
 
 @ExperimentalUnsignedTypes
-fun ByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): ByteArray {
+fun ByteArray.cycleLeftBits(numberOfBitsToShift: BigInteger): ByteArray {
     if (isEmpty()) {
         return ByteArray(0)
     }
@@ -61,7 +61,7 @@ fun ByteArray.shiftLeftBits(numberOfBitsToShift: BigInteger): ByteArray {
 
 
 @ExperimentalUnsignedTypes
-fun ByteArray.shiftRightBits(numberOfBitsToShift: BigInteger): ByteArray {
+fun ByteArray.cycleRightBits(numberOfBitsToShift: BigInteger): ByteArray {
     if (isEmpty()) {
         return ByteArray(0)
     }
