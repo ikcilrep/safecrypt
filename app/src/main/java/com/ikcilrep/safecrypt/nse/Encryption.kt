@@ -5,14 +5,14 @@ import java.security.SecureRandom
 
 
 @ExperimentalUnsignedTypes
-fun encrypt(data: ByteArray, key: BigInteger): CipherText {
+fun encrypt(data: ByteArray, key: BigInteger, salt: ByteArray): CipherText {
     if (data.isEmpty()) {
-        return CipherText(LongArray(0), ByteArray(0), ByteArray(0))
+        return CipherText(LongArray(0), ByteArray(0), ByteArray(0), ByteArray(0))
     }
     val blockSize = 256
     val saltSize = 16
     val random = SecureRandom()
-    val randomData = ByteArray(512 - data.size % 256);
+    val randomData = ByteArray(512 - data.size % 256)
     random.nextBytes(randomData)
     val digestedKey = digestInteger(key)
     val shiftedData = (data + randomData).cycleRightBits(digestedKey)
@@ -22,10 +22,10 @@ fun encrypt(data: ByteArray, key: BigInteger): CipherText {
 
     shiftedData.indices.step(blockSize).forEach {
         val block = shiftedData.drop(it).take(blockSize).toByteArray()
-        val salt = ByteArray(saltSize)
-        random.nextBytes(salt)
+        val blockSalt = ByteArray(saltSize)
+        random.nextBytes(blockSalt)
 
-        val derivedKey = deriveKey(block.size, key, salt)
+        val derivedKey = deriveKey(block.size, key, blockSalt)
         val iv = generateIV(
             block.size,
             derivedKey,
@@ -35,9 +35,9 @@ fun encrypt(data: ByteArray, key: BigInteger): CipherText {
         encrypted += block * derivedKey.dotProduct(derivedKey) - derivedKey * derivedKey.dotProduct(
             block - iv
         ) * 2
-        salts += salt
+        salts += blockSalt
     }
-    return CipherText(encrypted, ivs, salts)
+    return CipherText(encrypted, salt, ivs, salts)
 }
 
 
@@ -52,7 +52,7 @@ fun decrypt(data: LongArray, key: BigInteger, ivs: ByteArray, salts: ByteArray):
     val blockSize = data[2].toInt()
 
 
-    var decrypted = ByteArray(0);
+    var decrypted = ByteArray(0)
     (3 until data.size).step(blockSize).forEachIndexed { index, _ ->
         val block = data.drop(index * blockSize + 3).take(blockSize).toLongArray()
         val salt = salts.drop(index * saltSize).take(saltSize).toByteArray()

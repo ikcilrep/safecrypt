@@ -16,7 +16,8 @@ class EncryptionTest {
         val data = Random.nextBytes(length)
         val cipherText = encrypt(
             data,
-            key
+            key,
+            ByteArray(0)
         )
         val decryptedData =
             decrypt(cipherText.encryptedData, key, cipherText.ivs, cipherText.salts)

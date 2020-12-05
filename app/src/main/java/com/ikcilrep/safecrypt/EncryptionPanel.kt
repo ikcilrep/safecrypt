@@ -51,7 +51,8 @@ class EncryptionPanel : AppCompatActivity() {
     private fun doEncryption() {
         val ciphertext = encrypt(
             messageInput.text.toString().encodeToByteArray(),
-            key
+            key,
+            salt
         )
         resultView.text =
             Base64.encodeToString(ciphertext.toByteArray(), Base64.DEFAULT)
@@ -79,14 +80,16 @@ class EncryptionPanel : AppCompatActivity() {
         if (messageInput.text.toString().isNotEmpty()) {
             try {
                 val bytes = Base64.decode(messageInput.text.toString(), Base64.DEFAULT)
+                val (rest1, salts) = bytes.split()
+                val (rest2, ivs) = rest1.split()
+                val (cipherText, salt) = rest2.split()
+
                 key =
                     deriveKeyFromPassword(
                         password,
                         salt
                     )
-                val (rest, salts) = bytes.split()
-                val (cipherText, ivs) = rest.split()
-                resultView.text = decrypt(
+               resultView.text = decrypt(
                     cipherText.toLongArray(),
                     key,
                     ivs,
